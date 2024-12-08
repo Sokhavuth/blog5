@@ -8,13 +8,15 @@ export async function load({ locals, params }){
         query = {where: {AND: [{ categories: { contains: "news" } }, {NOT: {categories: { contains: "national" }}},
                         {NOT: {categories: { contains: "doc" }}}
         ]}} 
+    }else if(params.category === "movies"){
+        query = {where: { categories: { contains: "movie" }}}
     }else{
         query = {where: { categories: { contains: params.category }}}
     }
     const count = await postDb.count(locals, query)
     const settings = await locals.settings(locals)
     let posts
-    if(params.category === "movie"){
+    if(params.category === "movies"){
         posts = await postDb.getRandomAll(locals, settings.categories)
     }else{
         posts = await postDb.paginatePostsByCategory(locals, settings.categories)

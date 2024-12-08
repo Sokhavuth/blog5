@@ -8,7 +8,7 @@
     <div class="container">
         {#each data.posts as post}
             <div class="wrapper">
-                {#if data.category === "movie"}
+                {#if data.category === "movies"}
                 <a href={`/post/${post._id.$oid}`}>
                     <img src={post.thumb} alt=''/>
                     {#if post.videos.length}
